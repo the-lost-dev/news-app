@@ -1,9 +1,22 @@
-import 'package:flutter/material.dart';
-import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:news_app/src/app.dart';
+import 'exports.dart';
+
+//TODO: PASSWORD STRENGTH CHECEKR SIGN UP SCREEN
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
+
+  SystemChrome.setSystemUIOverlayStyle(const SystemUiOverlayStyle(
+    statusBarColor: Colors.transparent,
+    statusBarIconBrightness: Brightness.dark,
+    statusBarBrightness: Brightness.light,
+    systemNavigationBarColor: AppColors.grey100,
+    systemNavigationBarIconBrightness: Brightness.dark,
+  ));
+
+  SystemChrome.setPreferredOrientations([
+    DeviceOrientation.portraitUp,
+    DeviceOrientation.portraitDown,
+  ]);
 
   runApp(const ProviderScope(child: NewsApp()));
 }
