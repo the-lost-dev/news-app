@@ -1,5 +1,5 @@
 enum AppRoutes {
-  home(name: 'home', path: '/'),
+  home(name: 'home', path: '/home'),
 
   favorite(name: 'favorite', path: '/favorite'),
 
@@ -7,9 +7,11 @@ enum AppRoutes {
 
   profile(name: 'profile', path: '/profile'),
 
-  signup(name: 'signup', path: '/auth/signup'),
+  newsdetail(name: 'news-detail', path: 'news-detail'),
 
-  login(name: 'login', path: '/auth/login'),
+  signup(name: 'signup', path: '/signup'),
+
+  login(name: 'login', path: '/'),
 
   onboard(name: 'onboard', path: '/onboard');
 

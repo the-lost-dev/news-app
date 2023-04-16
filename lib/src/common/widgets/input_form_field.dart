@@ -15,7 +15,6 @@ class InputField extends StatelessWidget {
       horizontal: AppSizes.p16,
       vertical: AppSizes.p12,
     ),
-    this.onSubmitted,
     this.onEditingComplete,
     this.onChanged,
     this.onPressed,
@@ -25,12 +24,13 @@ class InputField extends StatelessWidget {
     this.inputFormatters,
     this.textInputAction,
     this.maxLength,
-    this.textColor = AppColors.black,
+    this.textColor = AppColors.black100,
     this.suffixPadding = 0,
     this.hintColor = AppColors.grey200,
     this.enabledBorder,
     this.focusedBorder,
     this.obscureText = false,
+    this.validator,
   });
 
   final String label;
@@ -41,7 +41,6 @@ class InputField extends StatelessWidget {
   final int maxLines;
   final bool isEnabled;
   final EdgeInsets? padding;
-  final Function(String)? onSubmitted;
   final Function()? onEditingComplete;
   final Function(String)? onChanged;
   final VoidCallback? onPressed;
@@ -57,6 +56,7 @@ class InputField extends StatelessWidget {
   final InputBorder? enabledBorder;
   final InputBorder? focusedBorder;
   final bool obscureText;
+  final String? Function(String?)? validator;
 
   @override
   Widget build(BuildContext context) {
@@ -68,14 +68,15 @@ class InputField extends StatelessWidget {
           style: Theme.of(context).textTheme.displayMedium,
         ),
         addVerticalSpace(AppSizes.p6),
-        TextField(
+        TextFormField(
+          autovalidateMode: AutovalidateMode.onUserInteraction,
+          validator: validator,
           maxLength: maxLength,
           onTap: onPressed,
           controller: controller,
           keyboardType: inputType,
           enabled: isEnabled,
           readOnly: readOnly,
-          onSubmitted: onSubmitted,
           onChanged: onChanged,
           textInputAction: textInputAction,
           onEditingComplete: onEditingComplete,
@@ -86,8 +87,8 @@ class InputField extends StatelessWidget {
             fillColor: fillColor,
             hintText: hint,
             hintStyle: Theme.of(context).textTheme.displaySmall!.copyWith(
-              color: hintColor,
-            ),
+                  color: hintColor,
+                ),
             prefixIcon: prefix,
             enabledBorder: enabledBorder,
             focusedBorder: focusedBorder,

@@ -1,16 +1,19 @@
 import 'package:news_app/exports.dart';
 
-class PrivacyPolicy extends StatelessWidget {
+final privacyCheckerProvider = StateProvider<bool>((ref) => false);
+
+class PrivacyPolicy extends ConsumerWidget {
   const PrivacyPolicy({super.key});
 
   @override
-  Widget build(BuildContext context) {
+  Widget build(BuildContext context, WidgetRef ref) {
+    final isPrivacyChecked = ref.watch(privacyCheckerProvider);
     return Row(
       mainAxisAlignment: MainAxisAlignment.start,
       children: [
         CustomCheckbox(
-          isChecked: true,
-          onTap: () => null, //TODO: IMPLEMENT
+          isChecked: isPrivacyChecked,
+          onTap: () => ref.read(privacyCheckerProvider.notifier).state = !isPrivacyChecked,
         ),
         wSizedBox4,
         RichText(

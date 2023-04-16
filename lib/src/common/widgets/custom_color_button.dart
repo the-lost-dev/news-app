@@ -23,7 +23,7 @@ class CustomColorButton extends StatelessWidget {
         child: Icon(
           icon,
           size: AppSizes.p18,
-          color: AppColors.black,
+          color: AppColors.black100,
         ),
       ),
     );

@@ -5,32 +5,37 @@ class NewsAppTheme {
     displayLarge: GoogleFonts.openSans(
       fontSize: AppSizes.p32,
       fontWeight: FontWeight.w700,
-      color: AppColors.black,
+      color: AppColors.black100,
     ),
     displayMedium: GoogleFonts.openSans(
       fontSize: AppSizes.p16,
       fontWeight: FontWeight.w600,
-      color: AppColors.black,
+      color: AppColors.black100,
     ),
     displaySmall: GoogleFonts.openSans(
       fontSize: AppSizes.p14,
       fontWeight: FontWeight.w400,
-      color: AppColors.black,
+      color: AppColors.black100,
+    ),
+    bodyLarge: GoogleFonts.openSans(
+      fontSize: AppSizes.p16,
+      fontWeight: FontWeight.w600,
+      color: AppColors.black100,
     ),
     bodyMedium: GoogleFonts.openSans(
       fontSize: AppSizes.p16,
       fontWeight: FontWeight.w500,
-      color: AppColors.black,
+      color: AppColors.black100,
     ),
     bodySmall: GoogleFonts.openSans(
       fontSize: AppSizes.p16,
       fontWeight: FontWeight.w400,
-      color: AppColors.black,
+      color: AppColors.black100,
     ),
     titleMedium: GoogleFonts.openSans(
       fontSize: AppSizes.p16,
       fontWeight: FontWeight.w600,
-      color: AppColors.black,
+      color: AppColors.black100,
     ),
   );
 
@@ -42,20 +47,20 @@ class NewsAppTheme {
       elevation: 0,
     ),
     textSelectionTheme: const TextSelectionThemeData(
-      cursorColor: AppColors.black,
+      cursorColor: AppColors.black100,
     ),
     colorScheme: const ColorScheme(
       brightness: Brightness.light,
       primary: AppColors.primaryColor,
       onPrimary: AppColors.white,
       secondary: AppColors.grey,
-      onSecondary: AppColors.black,
+      onSecondary: AppColors.black100,
       error: AppColors.red,
       onError: AppColors.white,
       background: AppColors.grey,
-      onBackground: AppColors.black,
+      onBackground: AppColors.black100,
       surface: AppColors.white,
-      onSurface: AppColors.black,
+      onSurface: AppColors.black100,
     ),
     inputDecorationTheme: InputDecorationTheme(
       filled: true,
@@ -72,6 +77,10 @@ class NewsAppTheme {
       enabledBorder: OutlineInputBorder(
         borderRadius: BorderRadius.circular(AppSizes.p10),
         borderSide: const BorderSide(color: AppColors.grey100),
+      ),
+      errorBorder:  OutlineInputBorder(
+        borderRadius: BorderRadius.circular(AppSizes.p10),
+        borderSide: const BorderSide(color: AppColors.red),
       ),
       focusColor: AppColors.grey200,
     ),

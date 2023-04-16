@@ -25,7 +25,7 @@ class OnBoardingDots extends ConsumerWidget {
                 index == dotIndex ? AppColors.primaryColor : AppColors.grey200,
             borderRadius: BorderRadius.circular(AppSizes.p10),
           ),
-          height: AppSizes.p4,
+          height: AppSizes.p6,
           width: index == dotIndex ? AppSizes.p20 : AppSizes.p8,
         ),
       ),

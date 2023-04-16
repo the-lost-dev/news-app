@@ -26,10 +26,31 @@ class AppStrings {
       'Stay Ahead of the Game with Comprehensive News Coverage';
   static const String onboardSubTitle1 =
       'Stay informed and engaged with our mobile app that delivers breaking news updates and in-depth analysis from around the world.';
-static const String onboardSubTitle2 =
+  static const String onboardSubTitle2 =
       'Say goodbye to endless scrolling and hello to personalized news feeds that deliver the most important stories based on your interests and preferences.';
-static const String onboardSubTitle3 =
+  static const String onboardSubTitle3 =
       'Stay on top of the latest breaking news updates, feature articles, and analysis, all in one convenient and easy-to-use mobile app.';
-
+  static const String welcomeBack = 'Welcome Back!';
+  static const String searchHint = 'Search for article...';
+  static const String politics = '#Politics';
+  static const String sports = '#Sports';
+  static const String tech = '#Technology';
+  static const String science = '#Science';
+  static const String shotForYou = 'Shot For You';
+  static const String viewAll = 'View All';
+  static const String article = 'Article';
+  static const String followers = 'Followers';
+  static const String following = 'Following';
+  static const String favorite = 'Favorites';
+  static const String notifications = 'Notifications';
+  static const String profile = 'Profile';
+  static const String detail = 'Detail';
+  static const String typeComment = 'Type your comment';
 }
 
+List<String> categories = [
+  AppStrings.politics,
+  AppStrings.sports,
+  AppStrings.tech,
+  AppStrings.science,
+];

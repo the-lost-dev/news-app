@@ -1,14 +1,23 @@
 import 'package:news_app/exports.dart';
 
-class GoogleAuthButton extends StatelessWidget {
+import '../../controllers/auth_controller.dart';
+
+class GoogleAuthButton extends ConsumerWidget {
   const GoogleAuthButton({super.key, this.isLogin = false});
 
   final bool isLogin;
 
   @override
-  Widget build(BuildContext context) {
+  Widget build(BuildContext context, WidgetRef ref) {
+    final state = ref.watch(
+      authControllerProvider(formType: AuthFormType.logIn),
+    );
+
+    final model = ref.watch(
+      authControllerProvider(formType: AuthFormType.logIn).notifier,
+    );
     return InkWell(
-      onTap: () => null, //TODO: IMPLEMENT
+      onTap: state.isLoading ? null : () => model.signInWithGoogle(),
       child: Container(
         width: double.infinity,
         padding: const EdgeInsets.symmetric(
@@ -19,20 +28,22 @@ class GoogleAuthButton extends StatelessWidget {
           borderRadius: BorderRadius.circular(AppSizes.p10),
           border: Border.all(color: AppColors.grey100),
         ),
-        child: Row(
-          mainAxisSize: MainAxisSize.min,
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: [
-            SvgPicture.asset(AppIcons.googleIcon),
-            wSizedBox4,
-            Text(
-              isLogin
-                  ? '${AppStrings.login} ${AppStrings.withGoogle}'
-                  : '${AppStrings.signup} ${AppStrings.withGoogle}',
-              style: Theme.of(context).textTheme.bodyMedium,
-            ),
-          ],
-        ),
+        child: state.isLoading
+            ? const LoadingIndicator()
+            : Row(
+                mainAxisSize: MainAxisSize.min,
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: [
+                  SvgPicture.asset(AppIcons.googleIcon),
+                  wSizedBox4,
+                  Text(
+                    isLogin
+                        ? '${AppStrings.login} ${AppStrings.withGoogle}'
+                        : '${AppStrings.signup} ${AppStrings.withGoogle}',
+                    style: Theme.of(context).textTheme.bodyMedium,
+                  ),
+                ],
+              ),
       ),
     );
   }

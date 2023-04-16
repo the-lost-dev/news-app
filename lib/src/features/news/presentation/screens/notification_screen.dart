@@ -6,6 +6,13 @@ class NotificationScreen extends ConsumerWidget {
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     SizeConfig().init(context);
-    return Container(color: AppColors.red);
+    return Scaffold(
+      appBar: const MainAppBar(title: AppStrings.notifications),
+      body: ScrollableWidget(
+        child: Column(
+          children: const [],
+        ),
+      ),
+    );
   }
 }

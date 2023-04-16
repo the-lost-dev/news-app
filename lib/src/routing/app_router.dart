@@ -1,13 +1,49 @@
 import 'package:news_app/exports.dart';
+import 'package:news_app/src/features/authentication/data/onboarding_repository.dart';
+
+import 'go_router_refresh_stream.dart';
 
 final _rootNavigatorKey = GlobalKey<NavigatorState>();
 final _shellNavigatorKey = GlobalKey<NavigatorState>();
 
 final goRouterProvider = Provider<GoRouter>((ref) {
+  final authRepository = ref.watch(authRepositoryProvider);
+  final onboardingRepository = ref.watch(onboardingRepositoryProvider);
   return GoRouter(
-    initialLocation: '/',
-    debugLogDiagnostics: false,
+    initialLocation:'/',
+    debugLogDiagnostics: true,
     navigatorKey: _rootNavigatorKey,
+    redirect: (context, state) {
+      final didCompleteOnboarding = onboardingRepository.isOnboardingComplete();
+
+      print(state.subloc);
+
+      if (!didCompleteOnboarding) {
+        if (state.subloc != AppRoutes.onboard.path) {
+          return AppRoutes.onboard.path;
+        }
+      }
+
+      final isUserLoggedIn = authRepository.currentUser != null;
+
+      print(isUserLoggedIn);
+
+      if (isUserLoggedIn) {
+        if (state.subloc == AppRoutes.signup.path ||
+            state.subloc == AppRoutes.login.path) {
+          return AppRoutes.home.path;
+        }
+      } else {
+        if (state.subloc.startsWith(AppRoutes.home.path) ||
+            state.subloc.startsWith(AppRoutes.profile.path) ||
+            state.subloc.startsWith(AppRoutes.notification.path) ||
+            state.subloc.startsWith(AppRoutes.favorite.path)) {
+          return AppRoutes.signup.path;
+        }
+      }
+      return null;
+    },
+    refreshListenable: GoRouterRefreshStream(authRepository.authStateChanges),
     routes: [
       ShellRoute(
         navigatorKey: _shellNavigatorKey,
@@ -18,6 +54,14 @@ final goRouterProvider = Provider<GoRouter>((ref) {
             name: AppRoutes.home.name,
             parentNavigatorKey: _shellNavigatorKey,
             builder: (context, state) => HomeScreen(key: state.pageKey),
+            routes: [
+              GoRoute(
+                path: AppRoutes.newsdetail.path,
+                name: AppRoutes.newsdetail.name,
+                parentNavigatorKey: _rootNavigatorKey,
+                builder: (context, state) => DetailScreen(key: state.pageKey),
+              ),
+            ],
           ),
           GoRoute(
             path: AppRoutes.favorite.path,
@@ -40,6 +84,12 @@ final goRouterProvider = Provider<GoRouter>((ref) {
         ],
       ),
       GoRoute(
+        path: AppRoutes.onboard.path,
+        name: AppRoutes.onboard.name,
+        parentNavigatorKey: _rootNavigatorKey,
+        builder: (context, state) => OnboardingScreen(key: state.pageKey),
+      ),
+      GoRoute(
         path: AppRoutes.signup.path,
         name: AppRoutes.signup.name,
         parentNavigatorKey: _rootNavigatorKey,
@@ -50,12 +100,6 @@ final goRouterProvider = Provider<GoRouter>((ref) {
         name: AppRoutes.login.name,
         parentNavigatorKey: _rootNavigatorKey,
         builder: (context, state) => LoginScreen(key: state.pageKey),
-      ),
-      GoRoute(
-        path: AppRoutes.onboard.path,
-        name: AppRoutes.onboard.name,
-        parentNavigatorKey: _rootNavigatorKey,
-        builder: (context, state) => OnboardingScreen(key: state.pageKey),
       ),
     ],
   );

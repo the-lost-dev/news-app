@@ -2,6 +2,10 @@ class AppIcons {
   static const googleIcon = 'assets/icons/google.svg';
   static const hidePasswordIcon = 'assets/icons/hide-password.svg';
   static const showPasswordIcon = 'assets/icons/show-password.svg';
+  static const searchIcon = 'assets/icons/search.svg';
+  static const shareIcon = 'assets/icons/share.svg';
+  
+  static const sendIcon = 'assets/icons/send.svg';
 
   static const activeHomeIcon = 'assets/icons/home.svg';
   static const activeFavoriteIcon = 'assets/icons/favorite.svg';

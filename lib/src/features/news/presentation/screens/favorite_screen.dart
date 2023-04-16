@@ -6,6 +6,13 @@ class FavoriteScreen extends ConsumerWidget {
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     SizeConfig().init(context);
-    return Container(color: AppColors.grey250);
+    return Scaffold(
+      appBar: const MainAppBar(title: AppStrings.favorite),
+      body: ScrollableWidget(
+        child: Column(
+          children: const [],
+        ),
+      ),
+    );
   }
 }

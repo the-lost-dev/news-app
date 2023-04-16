@@ -1,16 +1,20 @@
 import 'package:news_app/exports.dart';
 
-class RememberMe extends StatelessWidget {
+final rememberMeProvider = StateProvider<bool>((ref) => false);
+
+class RememberMe extends ConsumerWidget {
   const RememberMe({super.key});
 
   @override
-  Widget build(BuildContext context) {
+  Widget build(BuildContext context, WidgetRef ref) {
+    final rememberMe = ref.watch(rememberMeProvider);
     return Row(
       mainAxisAlignment: MainAxisAlignment.start,
       children: [
         CustomCheckbox(
-          isChecked: true,
-          onTap: () => null, //TODO: IMPLEMENT
+          isChecked: rememberMe,
+          onTap: () =>
+              ref.read(rememberMeProvider.notifier).state = !rememberMe,
         ),
         wSizedBox4,
         Text(

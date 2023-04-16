@@ -1,9 +1,25 @@
 import 'exports.dart';
+import 'src/features/authentication/data/onboarding_repository.dart';
 
 //TODO: PASSWORD STRENGTH CHECEKR SIGN UP SCREEN
+//TODO: LOGOUT BUTTON
+//TODO: NO NOTFICATIONS NO FAVORITES
+//TODO: SAVE USER NAME 
+//TODO: FORGOT PASSWORD BUTTON
 
-void main() async {
+
+Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
+
+  await Firebase.initializeApp(options: DefaultFirebaseOptions.currentPlatform);
+
+  final sharedPreferences = await SharedPreferences.getInstance();
+
+  final container = ProviderContainer(overrides: [
+    onboardingRepositoryProvider.overrideWithValue(
+      OnboardingRepository(sharedPreferences: sharedPreferences),
+    ),
+  ]);
 
   SystemChrome.setSystemUIOverlayStyle(const SystemUiOverlayStyle(
     statusBarColor: Colors.transparent,
@@ -18,5 +34,8 @@ void main() async {
     DeviceOrientation.portraitDown,
   ]);
 
-  runApp(const ProviderScope(child: NewsApp()));
+  runApp(UncontrolledProviderScope(
+    container: container,
+    child: const NewsApp(),
+  ));
 }

@@ -1,4 +1,3 @@
-
 import 'package:news_app/exports.dart';
 
 class CustomCheckbox extends StatelessWidget {
@@ -21,6 +20,9 @@ class CustomCheckbox extends StatelessWidget {
         width: AppSizes.p24,
         decoration: BoxDecoration(
           borderRadius: BorderRadius.circular(AppSizes.p8),
+          border: Border.all(
+            color: isChecked ? AppColors.primaryColor : AppColors.grey100,
+          ),
           color: isChecked ? AppColors.primaryColor : AppColors.white,
         ),
         child: Icon(

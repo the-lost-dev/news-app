@@ -4,9 +4,11 @@ class MainAppBar extends StatelessWidget with PreferredSizeWidget {
   const MainAppBar({
     super.key,
     required this.title,
+    this.actionWidget = const MoreButton(),
   });
 
   final String title;
+  final Widget actionWidget;
 
   @override
   Widget build(BuildContext context) {
@@ -31,10 +33,7 @@ class MainAppBar extends StatelessWidget with PreferredSizeWidget {
               title,
               style: Theme.of(context).textTheme.displayMedium,
             ),
-            CustomColorButton(
-              icon: Icons.more_vert_outlined,
-              onPressed: () => null, //TODO: IMPLEMENT
-            ),
+            actionWidget,
           ],
         ),
       ),
@@ -43,4 +42,16 @@ class MainAppBar extends StatelessWidget with PreferredSizeWidget {
 
   @override
   Size get preferredSize => const Size.fromHeight(kToolbarHeight);
+}
+
+class MoreButton extends StatelessWidget {
+  const MoreButton({super.key});
+
+  @override
+  Widget build(BuildContext context) {
+    return CustomColorButton(
+      icon: Icons.more_vert_outlined,
+      onPressed: () => null, //TODO: IMPLEMENT
+    );
+  }
 }
